@@ -9,6 +9,14 @@ void APPPlayerController::BeginPlay()
 	{
 		Subsystem->AddMappingContext(MappingContext, 0);
 	}
+
+	if (GetWorld())
+	{
+		if (APPBaseGameState* MyGameState = GetWorld()->GetGameState<APPBaseGameState>())
+		{
+			MyGameState->OnMatchStateChanged.AddDynamic(this, &ThisClass::OnMatchStateChanged);
+		}
+	}
 }
 
 void APPPlayerController::OnPossess(APawn* InPawn)
@@ -16,7 +24,16 @@ void APPPlayerController::OnPossess(APawn* InPawn)
 	Super::OnPossess(InPawn);
 }
 
-void APPPlayerController::SetupInputComponent()
+void APPPlayerController::OnMatchStateChanged(EPPMatchState State)
 {
-	Super::SetupInputComponent();
+	if (State == EPPMatchState::MS_InProgress)
+	{
+		SetInputMode(FInputModeGameOnly());
+		bShowMouseCursor = false;
+	}
+	else
+	{
+		SetInputMode(FInputModeUIOnly());
+		bShowMouseCursor = true;
+	}
 }

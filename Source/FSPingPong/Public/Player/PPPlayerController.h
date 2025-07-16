@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "PPBaseGameMode.h"
 #include "GameFramework/PlayerController.h"
 #include "PPPlayerController.generated.h"
 
@@ -20,5 +21,7 @@ protected:
 protected:
 	virtual void BeginPlay() override;
 	virtual void OnPossess(APawn* InPawn) override;
-	virtual void SetupInputComponent() override;
+private:
+	UFUNCTION()
+	void OnMatchStateChanged(EPPMatchState State);
 };
