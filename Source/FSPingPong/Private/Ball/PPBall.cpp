@@ -1,12 +1,5 @@
 ﻿#include "Ball/PPBall.h"
 
-
-void APPBall::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp,
-	FVector NormalImpulse, const FHitResult& Hit)
-{
-	//
-}
-
 void APPBall::BeginRound() const
 {
 	if (HasAuthority())
@@ -40,8 +33,6 @@ APPBall::APPBall()
 	MeshComponent->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	MeshComponent->SetCollisionObjectType(ECC_PhysicsBody);
 	MeshComponent->SetCollisionResponseToAllChannels(ECR_Block);
-
-	MeshComponent->OnComponentHit.AddDynamic(this, &APPBall::OnHit);
 
 	Velocity = InitSpeed;
 }

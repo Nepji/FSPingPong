@@ -13,7 +13,6 @@ class FSPINGPONG_API APPBall : public AActor
 
 public:
 	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 	void BeginRound() const;
 	void EndRound() const;
 	APPBall();
